@@ -34,8 +34,8 @@ class Controller {
                 where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month + 1),
                 include: models.Product
             })
-            await createPdf({ count, rows, name: name , month: monthNames[month] })
-            res.status(200).json(response("Success", "Sukses generate laporan product in"))
+            createPdf({ count, rows, name: name , month: monthNames[month], res })
+            // console.log("Goal")
         }
         if (req.query.type == "out") {
             const name = "Product out Monthly Report";
@@ -44,8 +44,7 @@ class Controller {
                 include: models.Product
             })
             // console.log(rows[0].Product["name"])
-            await createPdf({ count, rows, name: name, month: monthNames[month] })
-            res.status(200).json(response("Success", "Sukses generate laporan product out"))
+            createPdf({ count, rows, name: name, month: monthNames[month], res })
         }
         if (req.query.type == "all") {
             const name = "All activity Monthly Report";
@@ -57,16 +56,15 @@ class Controller {
                 where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month + 1),
                 include: models.Product
             })
-            await createPdf({ 
+            createPdf({ 
                 count_in, 
                 rows_in, 
                 count_out, 
                 rows_out, 
                 name: name, 
-                month: monthNames[month], type: "all" 
+                month: monthNames[month], type: "all",
+                res
             })
-            res.status(200).json(response("Success", "Sukses generate laporan product in dan product out"))
-            console.log(rows_out[0])
         }
         // console.log(rows[0].Product.name)
     }
