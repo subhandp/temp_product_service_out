@@ -4,6 +4,9 @@ const response = require('../helpers/response')
 const pagination = require('../helpers/pagination')
 const ReportController = require("../controllers/ReportController")
 
+const attProductOut = ['date', 'total',]
+const attProduct = ['name', 'photo_url', 'stock', 'price']
+const attUser = ['full_name', 'username', 'email', 'phone_number']
 
 class Controller {
     static async create (req, res) {
@@ -18,7 +21,11 @@ class Controller {
             }
 
             // Create new Chekout data
-            const out = await models.Product_Out.create(req.body.data)
+            const out = await models.Product_Out.create({
+                product_id: req.body.data.product_id,
+                date: date,
+                total: req.body.data.total
+            })
 
             // Update stock product after checkout
             await models.Product.update({ stock: products.stock - req.body.data.total }, { where: { id: products.id } })
@@ -51,9 +58,16 @@ class Controller {
             const show = await models.Product_Out.findAll({
                 limit: page.limit,
                 offset: page.offset,
-                include: [
-                    { model: models.Product } 
-                ]
+                attributes: attProductOut,
+                include: [{
+                    model: models.Product,
+                    attributes: attProduct,
+                    include: [{
+                        model: models.User,
+                        as: "supplier",
+                        attributes: attUser
+                    }]
+                }]
             })
 
             // Data yang akan ditampikan di response

@@ -77,9 +77,10 @@ class UserController {
       password,
       email,
       phone_number,
+      role
     } = req.body.data
 
-    // Validasi jika user sudah ada maka error
+    // Validasi user
     const {
       error
     } = registerValidation(req.body.data)
@@ -116,10 +117,10 @@ class UserController {
           full_name,
           username,
           password: hashedPassword,
-          salt: salt,
+          salt,
           email,
           phone_number,
-          role: "user"
+          role
         })
 
         // tampilkan data yang ditambahkan

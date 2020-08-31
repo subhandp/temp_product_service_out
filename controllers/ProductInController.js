@@ -10,7 +10,7 @@ const pagination = require("../helpers/pagination")
 
 const attProductIn = ['date', 'total',]
 const attProduct = ['name', 'photo_url', 'stock', 'price']
-const attUser = ['full_name', 'username', 'email', 'phone_number', 'role']
+const attUser = ['full_name', 'username', 'email', 'phone_number']
 
 class ProductInController {
   // uji coba routes berjalan dengan baik
@@ -158,21 +158,6 @@ class ProductInController {
     // mengambil param
     const { id } = req.params
 
-    // cari data yg akan dihapus
-    const findData = await Product_In.findByPk(
-      id, {
-        attributes: attProductIn,
-        include: [{
-          model: Product,
-          attributes: attProduct,
-          include: [{
-            model: User,
-            as: "supplier",
-            attributes: attUser
-          }]
-        }]
-      })
-
     // hapus data
     const delIn = await Product_In.destroy({
       where: { id: id }
@@ -180,9 +165,9 @@ class ProductInController {
 
     try {
       if (delIn) {
-        return res.status(200).json(response("Success", "Sukses hapus data user!", findData))
+        return res.status(200).json(response("Success", "Sukses hapus data produk in!", `ID : ${id}`))
       } else {
-        return res.status(400).json(response("Failed", "Data tidak user tidak ada!", `ID : ${id}`))
+        return res.status(400).json(response("Failed", "Data produk in tidak ada!", `ID : ${id}`))
       }
     } catch (error) {
       return res.status(400).json(response("Failed", error.message, "Kosong"))
