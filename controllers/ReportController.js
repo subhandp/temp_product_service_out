@@ -31,29 +31,29 @@ class Controller {
         if (req.query.type == "in") {
             const name = "Product in Monthly Report";
             const { count, rows } = await models.Product_In.findAndCountAll( { 
-                where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month + 1),
+                where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month),
                 include: models.Product
             })
-            createPdf({ count, rows, name: name , month: monthNames[month], res })
+            createPdf({ count, rows, name: name , month: monthNames[(month - 1)], res })
             // console.log("Goal")
         }
         if (req.query.type == "out") {
             const name = "Product out Monthly Report";
             const { count, rows } = await models.Product_Out.findAndCountAll( { 
-                where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month + 1),
+                where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month),
                 include: models.Product
             })
             // console.log(rows[0].Product["name"])
-            createPdf({ count, rows, name: name, month: monthNames[month], res })
+            createPdf({ count, rows, name: name, month: monthNames[(month - 1)], res })
         }
         if (req.query.type == "all") {
             const name = "All activity Monthly Report";
             const { count: count_in, rows: rows_in } = await models.Product_In.findAndCountAll( { 
-                where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month + 1),
+                where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month),
                 include: models.Product
             })
             const { count: count_out, rows: rows_out } = await models.Product_Out.findAndCountAll( { 
-                where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month + 1),
+                where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month),
                 include: models.Product
             })
             createPdf({ 
@@ -62,7 +62,7 @@ class Controller {
                 count_out, 
                 rows_out, 
                 name: name, 
-                month: monthNames[month], type: "all",
+                month: monthNames[(month - 1)], type: "all",
                 res
             })
         }
