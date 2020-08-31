@@ -87,13 +87,13 @@ class ProductInController {
 
   static async save(req, res){
     try {
-      const { date, total, product_id } = req.body.data
+      const { total, product_id } = req.body.data
 
       const findProduct = await Product.findByPk(product_id)
 
       const saveIn = await Product_In.create({
         product_id,
-        date,
+        date: new Date(),
         total
       })
 
@@ -120,10 +120,12 @@ class ProductInController {
 
   static async update(req, res){
     const { id } = req.params
-    const { product_id, date, total } = req.body.data
+    const { product_id, total } = req.body.data
 
     const inUpdate = await Product_In.update({
-      product_id, date, total
+      product_id,
+      date: new Date(),
+      total
     }, {
       where: { id: id }
     })
