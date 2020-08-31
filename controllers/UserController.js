@@ -149,7 +149,6 @@ class UserController {
       username,
       email,
       phone_number,
-      role,
       password
     } = req.body.data;
 
@@ -157,8 +156,7 @@ class UserController {
       full_name,
       username,
       email,
-      phone_number,
-      role
+      phone_number
     }, {
       where: {
         id: id
