@@ -120,7 +120,7 @@ class UserController {
           salt,
           email,
           phone_number,
-          role
+          role: "user"
         })
 
         // tampilkan data yang ditambahkan
