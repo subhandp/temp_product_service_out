@@ -20,7 +20,9 @@ module.exports = (data) => {
             }
             pdf.create(result, options).toFile(path.join(__dirname, `../asset/pdf/${data.month.toLowerCase()}-${data.name.toLowerCase()}.pdf`), function(err, val) {
                 if (!err) {
-                    data.res.download(path.join(__dirname, `../asset/pdf/${data.month.toLowerCase()}-${data.name.toLowerCase()}.pdf`))
+                    if (!data.note) {
+                        data.res.download(path.join(__dirname, `../asset/pdf/${data.month.toLowerCase()}-${data.name.toLowerCase()}.pdf`))
+                    }
                 } else if (err) {
                     res.status(400).json(response("Fail", error))
                 }
