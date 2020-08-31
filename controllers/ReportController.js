@@ -5,6 +5,7 @@ const fs = require("fs")
 const mustache = require("mustache")
 const createPdf = require("../helpers/createPdf")
 const sequelize = require("sequelize")
+const response = require('../helpers/response')
 
 class Controller {
     static async emptyNotification(name, date) {
@@ -33,7 +34,8 @@ class Controller {
                 where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month + 1),
                 include: models.Product
             })
-            createPdf({ count, rows, name: name , month: monthNames[month] })
+            await createPdf({ count, rows, name: name , month: monthNames[month] })
+            res.status(200).json(response("Success", "Sukses generate laporan product in"))
         }
         if (req.query.type == "out") {
             const name = "Product out Monthly Report";
@@ -42,7 +44,8 @@ class Controller {
                 include: models.Product
             })
             // console.log(rows[0].Product["name"])
-            createPdf({ count, rows, name: name, month: monthNames[month] })
+            await createPdf({ count, rows, name: name, month: monthNames[month] })
+            res.status(200).json(response("Success", "Sukses generate laporan product out"))
         }
         if (req.query.type == "all") {
             const name = "All activity Monthly Report";
@@ -54,7 +57,7 @@ class Controller {
                 where: sequelize.where(sequelize.fn("month", sequelize.col("date")), month + 1),
                 include: models.Product
             })
-            createPdf({ 
+            await createPdf({ 
                 count_in, 
                 rows_in, 
                 count_out, 
@@ -62,6 +65,7 @@ class Controller {
                 name: name, 
                 month: monthNames[month], type: "all" 
             })
+            res.status(200).json(response("Success", "Sukses generate laporan product in dan product out"))
             console.log(rows_out[0])
         }
         // console.log(rows[0].Product.name)
