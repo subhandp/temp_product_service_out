@@ -1,13 +1,10 @@
 require("dotenv").config()
 const models = require("../models")
 const transporter = require("../config/mailConfig")
-const response = require("../helpers/response")
 const fs = require("fs")
 const mustache = require("mustache")
 const createPdf = require("../helpers/createPdf")
 const sequelize = require("sequelize")
-const cron = require("node-cron")
-const { start } = require("repl")
 
 class Controller {
     static async emptyNotification(name, date) {
