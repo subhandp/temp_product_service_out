@@ -156,9 +156,9 @@ class ProductController {
 
     try {
       if (productUpdate) {
-        return res.status(200).json(response("Success", "Sukses update user!", showProduct))
+        return res.status(200).json(response("Success", "Sukses update data produk!", showProduct))
       } else {
-        return res.status(400).json(response("Failed!", "Data user tidak ada!", "Kosong"))
+        return res.status(400).json(response("Failed!", "Data data produk tidak ada!", "Kosong"))
       }
     } catch (error) {
       return res.status(400).json(response("Failed", error.message, "Kosong"))
@@ -178,7 +178,7 @@ class ProductController {
 
     try {
       if (delProduct) {
-        return res.status(200).json(response("Success", "Sukses hapus data user!", `ID : ${id}`))
+        return res.status(200).json(response("Success", "Sukses hapus data produk!", `ID : ${id}`))
       } else {
         return res.status(400).json(response("Failed", "Data produk tidak ada!", `ID : ${id}`))
       }
