@@ -23,7 +23,7 @@ class Controller {
             // Create new Chekout data
             const out = await models.Product_Out.create({
                 product_id: req.body.data.product_id,
-                date: date,
+                date: new Date(),
                 total: req.body.data.total
             })
 
