@@ -1,0 +1,14 @@
+node_modules
+config/config.json
+.env
+package-lock.json
+/dist
+controllers/dist
+routes/dist
+migrations/dist
+models/dist
+seeders/dist
+helpers/dist
+middleware/dist
+tmp
+config/dist
