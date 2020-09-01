@@ -10,7 +10,7 @@ const {
 const response = require('../helpers/response')
 
 // atrributes tertentu yang ditampilkan di postman
-const attUser = ['full_name', 'username', 'email', 'phone_number', 'role']
+const attUser = ['id', 'full_name', 'username', 'email', 'phone_number', 'role']
 
 class UserController {
   // uji coba routes berjalan dengan baik

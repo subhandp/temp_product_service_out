@@ -5,7 +5,7 @@ const pagination = require('../helpers/pagination')
 const ReportController = require("../controllers/ReportController")
 
 const attProductOut = ['date', 'total',]
-const attProduct = ['name', 'photo_url', 'stock', 'price']
+const attProduct = ['id', 'name', 'photo_url', 'stock', 'price']
 const attUser = ['full_name', 'username', 'email', 'phone_number']
 
 class Controller {

@@ -9,7 +9,7 @@ const response = require('../helpers/response')
 const pagination = require("../helpers/pagination")
 
 const attProductIn = ['date', 'total',]
-const attProduct = ['name', 'photo_url', 'stock', 'price']
+const attProduct = ['id', 'name', 'photo_url', 'stock', 'price']
 const attUser = ['full_name', 'username', 'email', 'phone_number']
 
 class ProductInController {
