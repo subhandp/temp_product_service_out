@@ -1,5 +1,7 @@
-module.exports = (status, message, data) => {
-    return {
-        status, message, data
-    }
-}
+module.exports = (status, message, data = []) => {
+  return {
+    status,
+    message,
+    data,
+  };
+};
