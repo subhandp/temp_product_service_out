@@ -4,3 +4,4 @@ config/config.json
 package-lock.json
 dist
 tmp
+yarn.lock
