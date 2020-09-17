@@ -30,6 +30,9 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (req, res) => {
+  res.json({ hello: "world" });
+});
 app.use("/api/v1/user", auth, userRoute);
 app.use("/api/v1/product", auth, productRoute);
 app.use("/api/v1/in", auth, productInRoute);
