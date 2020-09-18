@@ -22,7 +22,7 @@ const allowedOrigins = ["http://localhost:3000", "http://localhost:8080"];
 //cors
 app.use(
   cors({
-    origin: (origin, cb) => {
+    origin: (origin, callback) => {
       // allow requests with no origin
       // (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
