@@ -18,22 +18,24 @@ const reportRoute = require("./routes/print");
 const auth = require("./middleware/AuthMiddleware");
 const taskScheduler = require("./helpers/taskScheduler");
 
-const allowedOrigins = [
+const whitelist = [
   "http://localhost:3000",
   "http://localhost:8080",
   "http://localhost:8081",
 ];
 //cors
-// app.use(
-//   cors({
-//     origin: true,
-//   })
-// );
-app.all("/*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
+
 // untuk cloudinary
 app.use(
   fileUpload({
