@@ -137,7 +137,7 @@ class ProductController {
   static async updateProduct(req, res) {
     const { id } = req.params;
 
-    const { name, stock, price, user_id } = req.body.data;
+    const { name, stock, price, user_id } = req.body;
 
     const productUpdate = await Product.update(
       {
