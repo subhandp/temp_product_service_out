@@ -26,18 +26,25 @@ const whitelist = [
   /\.heroku\.com$/
 ];
 //cors
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      console.log({ origin, ada: whitelist.indexOf(origin) });
-      if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-  })
-);
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       console.log({ origin, ada: whitelist.indexOf(origin) });
+//       if (whitelist.indexOf(origin) !== -1) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//   })
+// );
+
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // untuk cloudinary
 app.use(
