@@ -8,7 +8,7 @@ const {
 const response = require('../helpers/response')
 const pagination = require("../helpers/pagination")
 
-const attProductIn = ['date', 'total',]
+const attProductIn = ['id', 'date', 'total',]
 const attProduct = ['id', 'name', 'photo_url', 'stock', 'price']
 const attUser = ['full_name', 'username', 'email', 'phone_number']
 
