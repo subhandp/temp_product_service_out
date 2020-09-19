@@ -23,9 +23,17 @@ const whitelist = [
   "http://localhost:8080",
   "http://localhost:8081",
   "http://localhost",
-  /\.heroku\.com$/
+  /\.heroku\.com$/,
 ];
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 //cors
+app.use(cors());
 // app.use(
 //   cors({
 //     origin: function (origin, callback) {
@@ -38,13 +46,6 @@ const whitelist = [
 //     },
 //   })
 // );
-
-
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
 
 // untuk cloudinary
 app.use(
