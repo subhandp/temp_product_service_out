@@ -23,6 +23,7 @@ const whitelist = [
   "http://localhost:8080",
   "http://localhost:8081",
   "http://localhost",
+  /\.heroku\.com$/
 ];
 //cors
 app.use(
