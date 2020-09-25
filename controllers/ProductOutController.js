@@ -2,7 +2,7 @@ require('dotenv').config()
 const models = require("../models")
 const response = require('../helpers/response')
 const pagination = require('../helpers/pagination')
-const ReportController = require("../controllers/ReportController")
+// const ReportController = require("../controllers/ReportController")
 
 const attProductOut = ['id', 'date', 'total',]
 const attProduct = ['id', 'name', 'photo_url', 'stock', 'price']
@@ -32,7 +32,8 @@ class Controller {
 
             if ((req.body.data.total - products.stock) == 0) {
                 // Send empty stock email notification to admin
-                ReportController.emptyNotification(products.name, out.date)
+                // ReportController.emptyNotification(products.name, out.date)
+                return res.status(200).json(response("Success", "Test report services", out))
             }
 
             return res.status(200).json(response("Success", "Check out receipt is created", out))
